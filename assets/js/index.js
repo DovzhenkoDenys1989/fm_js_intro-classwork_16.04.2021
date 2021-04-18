@@ -16,17 +16,14 @@ vocabulary.set('queue', 'очередь');
 const inputStr = 'Cat counT Dog set queue Kernel algOrithm strUcTure of the TABLE';
 
 const translate = (str) => {
-  const lowerString = str.toLowerCase();
-  const splitStrArray = lowerString.split(' ');
-  const translatedStringArray = splitStrArray.map((word)=>{
-    if(vocabulary.has(word)){
-      return vocabulary.get(word);
-    }
-    return word;
-  });
-  const translatedString = translatedStringArray.join(' ');
-
-  return translatedString;
-}
+  return str
+  .trim()
+  .toLowerCase()
+  .split(" ")
+  .map((word) => {
+    return vocabulary.has(word) ? vocabulary.get(word) : word;
+  })
+  .join(" ");
+};
 
 console.log(translate(inputStr));
