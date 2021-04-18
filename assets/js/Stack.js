@@ -68,7 +68,7 @@ const optinons = {
 }
 
 function checkSequence(str, optinons) {
-  const stack = new Stack();
+  const stack = new Stack(str.length);
   const braces = optinons.braces;
   const closeBraces = Object.values(braces);
 
@@ -82,20 +82,7 @@ function checkSequence(str, optinons) {
     }
 
     /* 2. Определить пуст ли стек. Вернуть false */
-    // if(braces[stack.pip()] === symbol){
-    //   braces[stack.p]
-    // }
-
-    if(closeBraces.includes(symbol) && stack.isEmpty){
-      return false;
-    }
-
-    const lastItemFromStack = stack.pip();
-    const correctCloseBrace = braces[lastItemFromStack];
-
-    if(symbol === correctCloseBrace){
-      stack.pop();
-    } else if (braces[symbol] || closeBraces.includes(symbol)){
+    if(closeBraces.includes(symbol) && braces[stack.pop()] !== symbol){
       return false;
     }
 
@@ -105,20 +92,3 @@ function checkSequence(str, optinons) {
 
 
 console.log(checkSequence('(ts))',optinons))
-
-
-/*function checkSequence(str) {
-  const stack = new Stack();
-  for (const symbol of str) {
-    if (symbol === "(") {
-      stack.push(symbol);
-    }
-    if (stack.isEmpty) {
-      return false;
-    }
-    if (symbol === ")" && stack.pip() === "(") {
-      stack.pop();
-    }
-  }
-  return stack.isEmpty;
-}*/
